@@ -30,27 +30,18 @@ fs.readFile(inputfile, "utf8", (err, data) => {
             }
         }
         if (vokalgruppe.length) vokalgruppen.push(vokalgruppe);
-        console.log(vokalgruppen);
         words.push({
             word: word,
             vokalgruppen: vokalgruppen
         });
     }
-    // 
-    // END of Vokalgruppen filtering
-    // START of Wortpaare filtering 
-    // 
-    // Loop through every word and its vokalgruppen
+    // Loop through every word
     for (let i = 0; i < words.length; i++) {
-        // Loop through every other word and its vokalgruppen
-        for (let j = 0; j < words.length; j++) {
-            // Check if the words are the same
-            if (words[i].word != words[j].word) return;
-            // Check if any word ends with the other word
-            if (words[i].word.endsWith(words[j].word) || words[j].word.endsWith(words[i].word)) return;
-        };
-    };
+        // Get massgebende vokalgruppe
+        let massgebende_vokalgruppe;
+        if (words[i].vokalgruppen.length == 1) massgebende_vokalgruppe = words[i].vokalgruppen[0];
+        else massgebende_vokalgruppe = words[i].vokalgruppen[words[i].vokalgruppen.length - 1];
+        words[i].massgebende_vokalgruppe = massgebende_vokalgruppe;
+    }
+    console.log(words);
 });
-
-
-console.log(words);
