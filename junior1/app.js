@@ -1,3 +1,9 @@
+const inputfile = "input.txt";
+
+// 
+// End of Config
+// 
+
 const fs = require("fs");
 
 var words = [];
@@ -5,7 +11,7 @@ let wortpaare = [];
 
 // Read the file and parse every line into the words array
 // A vokalgruppe is a group of vowels that are next to each other | All vokalgruppen in haeuser would look like ["aeu", "e"]
-fs.readFile("input.txt", "utf8", (err, data) => {
+fs.readFile(inputfile, "utf8", (err, data) => {
     if (err) throw err;
     for (let word of data.split("\n")) {
         let vokalgruppen = [];
