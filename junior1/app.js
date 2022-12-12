@@ -18,11 +18,12 @@ fs.readFile("input.txt", "utf8", (err, data) => {
                 // If the letter is not a vowel, add the vokalgruppe to the vokalgruppen array and reset the vokalgruppe
                 if (vokalgruppe != "") {
                     vokalgruppen.push(vokalgruppe);
-                    console.log(vokalgruppen);
                     vokalgruppe = "";
                 }
             }
         }
+        if (vokalgruppe.length) vokalgruppen.push(vokalgruppe);
+        console.log(vokalgruppen);
         words.push({
             word: word,
             vokalgruppen: vokalgruppen
