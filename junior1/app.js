@@ -53,6 +53,21 @@ fs.readFile(inputfile, "utf8", (err, data) => {
     }
     // Remove all words that are invalid
     words = words.filter(word => !word.invalid);
+    // Loop through every word
+    for (let i = 0; i < words.length; i++) {
+        // Loop through every word again
+        for (let j = 0; j < words.length; j++) {
+            // If any word ends with the other word, just skip it
+            if (words[i].word.endsWith(words[j].word) || words[j].word.endsWith(words[i].word)) continue;
+            // Check if the buchstaben_nach_massgebender_inkl are at least half the words length
+            if (words[i].buchstaben_nach_massgebender_inkl == words[i].word.length) {
+                wortpaare.push(
+                    [
+                        words[i],
+                        words[j]
+                    ]);
+            }
+        }
     }
     console.log(words);
 });
