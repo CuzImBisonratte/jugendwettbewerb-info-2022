@@ -42,6 +42,17 @@ fs.readFile(inputfile, "utf8", (err, data) => {
         if (words[i].vokalgruppen.length == 1) massgebende_vokalgruppe = words[i].vokalgruppen[0];
         else massgebende_vokalgruppe = words[i].vokalgruppen[words[i].vokalgruppen.length - 2];
         words[i].massgebende_vokalgruppe = massgebende_vokalgruppe;
+        // Count the amount of letters after the massgebende vokalgruppe
+        let letters_after_massgebende_vokalgruppe = 0;
+        for (let j = words[i].word.indexOf(massgebende_vokalgruppe) + massgebende_vokalgruppe.length; j < words[i].word.length; j++) {
+            if (words[i].word[j].match(/[a-z]/)) letters_after_massgebende_vokalgruppe++;
+        }
+        words[i].buchstaben_nach_massgebender_inkl = letters_after_massgebende_vokalgruppe + massgebende_vokalgruppe.length;
+        // Check if the buchstaben_nach_massgebender_inkl is at least half the length of the word | if not so, remove it from the words array
+        if (words[i].buchstaben_nach_massgebender_inkl < words[i].word.length / 2) words[i].invalid = true;
+    }
+    // Remove all words that are invalid
+    words = words.filter(word => !word.invalid);
     }
     console.log(words);
 });
