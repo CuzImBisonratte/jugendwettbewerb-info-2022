@@ -40,7 +40,7 @@ fs.readFile(inputfile, "utf8", (err, data) => {
         // Get massgebende vokalgruppe
         let massgebende_vokalgruppe;
         if (words[i].vokalgruppen.length == 1) massgebende_vokalgruppe = words[i].vokalgruppen[0];
-        else massgebende_vokalgruppe = words[i].vokalgruppen[words[i].vokalgruppen.length - 1];
+        else massgebende_vokalgruppe = words[i].vokalgruppen[words[i].vokalgruppen.length - 2];
         words[i].massgebende_vokalgruppe = massgebende_vokalgruppe;
     }
     console.log(words);
